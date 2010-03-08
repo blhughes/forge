@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE article PUBLIC "-//OASIS//DTD DocBook XML V4.2//EN"
+"http://www.oasis-open.org/docbook/xml/4.2/docbookx.dtd"
+>
+
+
+<article>
+  
+<articleinfo>
+<title>Forge Fedora Management Framework Requirements</title>
+</articleinfo>
+
+
+
+<section>
+<title>Application Overview</title>
+<para>The idea behind Forge is a centralized system that can easily be expanded to include management functions for a large amount of Fedora client computers. 
+</para>
+</section>
+
+
+<section>
+<title>Core Functional Requirements</title>
+
+<itemizedlist>
+	  <listitem><para>Provide a framework for management functions.</para></listitem>
+	  <listitem><para>Ensure all communications are secure and authenticated.</para></listitem>
+</itemizedlist>
+
+<section>
+
+
+<title>Modules</title>
+
+<section>
+	<title>Core Client Model</title>
+	<itemizedlist>
+
+	  <listitem><para></para></listitem>
+	</itemizedlist>
+</section>
+
+
+<section>
+	<title>Hardware Info</title>
+	<itemizedlist>
+		<listitem><para></para></listitem>
+	</itemizedlist>
+</section>
+
+<section>
+	<title>Repository and Software Management</title>
+	<itemizedlist>
+		<listitem><para>Select packages for automated client installation.</para></listitem>
+		<listitem><para>Upload packages to repositories.</para></listitem>
+		<listitem><para>Rebuild repositories.</para></listitem>
+	</itemizedlist>
+</section>
+
+<section>
+	<title>Password Updates</title>
+	<itemizedlist>
+		<listitem><para>Update Root Password</para></listitem>
+		<listitem><para>Update Grub Password</para></listitem>
+	</itemizedlist>	
+</section>
+
+
+</section>
+</section>
+
+</article>

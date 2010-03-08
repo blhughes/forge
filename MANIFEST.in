@@ -1,0 +1,14 @@
+include version
+recursive-include etc *
+recursive-include docs *
+include AUTHORS
+include LICENSE
+include README
+include forgec/forge-keytab
+include forgec/forge-init
+include forgec/kscomplete
+include modules/yumtransaction
+include modules/hardware
+include modules/passwd
+include modules/grub
+include etc/forge.cron
