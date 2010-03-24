@@ -1,0 +1,27 @@
+#!/usr/bin/python
+
+import os,sys
+from optparse import OptionParser
+import json
+sys.path.append(os.path.abspath(os.path.join("..",os.path.dirname(__file__))))
+
+import forge
+
+parser = OptionParser()
+(options, args) = parser.parse_args()
+if len(args) != 2:
+	parser.error("incorrect number of arguments")
+command = args[0]
+subcommand = args[1]
+json_args = json.load(sys.stdin)
+
+REMUSER = os.getenv("REMUSER","").replace("@NMT.EDU","")
+REMHOST = os.getenv("REMOTE_ADDR","")
+
+
+try:
+	print json.dumps(forge.invoke(command,subcommand,json_args))
+except Exception as e:
+	print json.dumps({'failure':True,'expection':repr(e),"message":e.message(),"backtrace":e.backtrace()})
+	
+	
