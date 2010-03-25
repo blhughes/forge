@@ -23,13 +23,13 @@ import forge.models.passwords
 #Get forge configuration
 config = ConfigParser.ConfigParser()
 config.read(['/etc/forge.conf',os.path.expanduser('~/.forge.conf')])
+dsn = config.get("database","dsn")
 
-engine=sqlalchemy.create_engine("sqlite:///file.db",module=sqlite)
+#Setup Database Connection
+engine=sqlalchemy.create_engine(dsn,module=sqlite)
 forge.models.passwords.init(engine)
 Session = sqlalchemy.orm.sessionmaker(bind=engine)
 session = Session()
-
-
 
 sys.path.append(os.path.abspath(os.path.join("..",os.path.dirname(__file__))))
 
@@ -49,7 +49,6 @@ class ArgumentError(Exception):
 		return self.__unicode__()
 	def __unicode__(self):	
 		return "JSON object required as final argument"
-
 
 class Commands(object):
 	def find(self,command,subcommand):
