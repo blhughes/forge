@@ -27,5 +27,3 @@ except Exception as e:
 	tb =  " ".join(traceback.format_exception(exc_type, exc_value, exc_traceback))
 	tb = " ".join(tb.split("\n"))
 	print json.dumps({'failure':True,'expection':e.__class__.__name__,"message":e.__unicode__(),"backtrace":tb})
-	
-	
