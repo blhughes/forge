@@ -3,6 +3,7 @@
 import os,sys
 from optparse import OptionParser
 import json
+import traceback
 sys.path.append(os.path.abspath(os.path.join("..",os.path.dirname(__file__))))
 
 import forge
@@ -22,6 +23,9 @@ REMHOST = os.getenv("REMOTE_ADDR","")
 try:
 	print json.dumps(forge.invoke(command,subcommand,json_args))
 except Exception as e:
-	print json.dumps({'failure':True,'expection':repr(e),"message":e.message(),"backtrace":e.backtrace()})
+	exc_type, exc_value, exc_traceback = sys.exc_info()
+	tb =  " ".join(traceback.format_exception(exc_type, exc_value, exc_traceback))
+	tb = " ".join(tb.split("\n"))
+	print json.dumps({'failure':True,'expection':e.__class__.__name__,"message":e.__unicode__(),"backtrace":tb})
 	
 	
