@@ -18,6 +18,9 @@ import forge.commands.kerberos
 
 import forge.models
 import forge.models.passwords
+import forge.models.groups
+import forge.models.packages
+import forge.models.overlays
 
 
 #Get forge configuration
@@ -28,6 +31,9 @@ dsn = config.get("database","dsn")
 #Setup Database Connection
 engine=sqlalchemy.create_engine(dsn,module=sqlite)
 forge.models.passwords.init(engine)
+forge.models.groups.init(engine)
+forge.models.packages.init(engine)
+forge.models.overlays.init(engine)
 Session = sqlalchemy.orm.sessionmaker(bind=engine)
 session = Session()
 
