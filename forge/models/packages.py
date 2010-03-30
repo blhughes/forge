@@ -15,7 +15,7 @@ class Package(object):
                 self.name = name
         
         def __repr__(self):
-                return "<Password('%s')>" %(self.name)
+                return "<Package('%s')>" %(self.name)
 
 
 mapper(Package, packages_table)

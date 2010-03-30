@@ -1,5 +1,5 @@
 from sqlalchemy import Table, Column, Integer, String, MetaData, ForeignKey
-from sqlalchemy.orm import mapper, relation, backref
+from sqlalchemy.orm import mapper, relation, backref, clear_mappers
 import forge.models
 import forge.models.overlays
 import forge.models.machines
@@ -13,12 +13,12 @@ groups_table = Table('groups', metadata,
         Column('distribution', String),
 )
 
-machines_groups_table = Table('machine_groups', metadata,
+machine_groups_table = Table('machine_groups', metadata,
 	Column('group',Integer, ForeignKey('groups.id')),
 	Column('machine',Integer, ForeignKey('machines.ip')),
 )
 	
-packages_groups_table = Table('packages_groups', metadata,
+package_groups_table = Table('package_groups', metadata,
 	Column('group',Integer, ForeignKey('groups.id')),
 	Column('package',Integer, ForeignKey('packages.id')),
 )
@@ -30,13 +30,13 @@ class Group(object):
                 self.distribution = distribution
         
         def __repr__(self):
-                return "<Password('%s','%s')>" %(self.name, self.distribution)
+                return "<Group('%s','%s')>" %(self.name, self.distribution)
 
 
 mapper(Group, groups_table, properties={
-	'overlays': relation(forge.models.overlays.Overlay, backref='groups'),
-	'machines': relation(forge.models.machines.Machine, secondary=machines_groups_table, backref='groups'),
-	'packages': relation(forge.models.packages.Package, secondary=packages_groups_table, backref='groups'),
+	'overlays': relation(forge.models.overlays.Overlay, backref='groups', cascade="all, delete, delete-orphan"),
+	'machines': relation(forge.models.machines.Machine, secondary=machine_groups_table, backref='groups', cascade="all, delete"),
+	'packages': relation(forge.models.packages.Package, secondary=package_groups_table, backref='groups', cascade="all, delete"),
 	
 })
 

@@ -17,7 +17,7 @@ class Overlay(object):
 		self.order = order
         
         def __repr__(self):
-                return "<Password('%s','%d')>" %(self.name,self.order)
+                return "<Overlay('%s','%d')>" %(self.name,self.order)
 
 
 mapper(Overlay, overlays_table)

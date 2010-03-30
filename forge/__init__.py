@@ -74,7 +74,7 @@ class Commands(object):
 		try:
 			(file, pathname, description)=imp.find_module(subcommand,module.__path__)	
 			module=imp.load_module(subcommand,file,pathname,description)
-		except:
+ 		except ImportError:
 			raise CommandNotFound(command,subcommand)
 		if subcommand.capitalize() not in module.__dict__.keys():
 			raise CommandNotFound(command,subcommand)

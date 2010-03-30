@@ -12,13 +12,13 @@ machines_table = Table('machines', metadata,
 
 
 class Machine(object):
-        def __init__(self,name,profile,arch):
-                self.name = name
+        def __init__(self,ip,profile,arch):
+                self.ip = ip
 		self.profile = profile
 		self.arch = arch
         
         def __repr__(self):
-                return "<Password('%s','%s','%s')>" %(self.name,self.profile,self.arch)
+                return "<Machine('%s','%s','%s')>" %(self.name,self.profile,self.arch)
 
 
 mapper(Machine, machines_table)
