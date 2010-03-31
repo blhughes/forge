@@ -2,7 +2,7 @@ import forge
 from forge.models.machines import Machine
 from forge.models.groups import Group
 
-class Join(object):
+class Leave(object):
 	def __init__(self,json_args,session):
                 if type(json_args) != type({}):
                         raise TypeError("JSON Arg must be dict type")
@@ -20,8 +20,10 @@ class Join(object):
 		group = self.session.query(Group).filter(Group.name == self.group).filter(Group.distribution == self.distribution).first()
                 if not group:
                         raise LookupError("No group: %s"%self.group)
+		if not group in machine.groups:
+			raise LookupError("Machine not in group: %s"%self.group)
 
-		group.machines.append(machine)
+		group.machines.remove(machine)
                 self.session.commit()
-                return {'ip':machine.ip, 'group':group.name, 'distribution':group.distribution}
+                return {'ip':self.ip}
 

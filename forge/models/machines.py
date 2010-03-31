@@ -18,7 +18,7 @@ class Machine(object):
 		self.arch = arch
         
         def __repr__(self):
-                return "<Machine('%s','%s','%s')>" %(self.name,self.profile,self.arch)
+                return "<Machine('%s','%s','%s')>" %(self.ip,self.profile,self.arch)
 
 
 mapper(Machine, machines_table)
