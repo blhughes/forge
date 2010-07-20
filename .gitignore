@@ -1,1 +1,3 @@
 *.pyc
+forge.db
+build/

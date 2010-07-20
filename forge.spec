@@ -49,23 +49,13 @@ rm -fr $RPM_BUILD_ROOT
 %if 0%{?fedora} > 8
 %{python_sitelib}/forge*.egg-info
 %endif
-%{_bindir}/forgec
-%{_sbindir}/forge-init
-%{_sbindir}/forge-keytab
-%{_sbindir}/kscomplete
-%dir %{_sysconfdir}/%{name}
-%dir %{_sysconfdir}/pki/%{name}
+%{_sbindir}/forged
 %config(noreplace) /etc/forge.conf
 %config(noreplace) /etc/logrotate.d/forge_rotate
-%dir %{python_sitelib}/forge
-%dir %{python_sitelib}/forge/ssl
-%{python_sitelib}/forge/ssl/*.py*
-%{python_sitelib}/forge/*.py*
+%{python_sitelib}/*
 %dir /var/log/forge
 %doc AUTHORS README LICENSE
 %{_mandir}/man8/forgec.8.gz
-%dir %{_datadir}/%{name}
-%{_datadir}/%{name}/*
 /etc/cron.d/forge.cron
 
 
