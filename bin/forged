@@ -14,13 +14,13 @@ if len(args) != 2:
 	parser.error("incorrect number of arguments")
 command = args[0]
 subcommand = args[1]
-json_args = json.load(sys.stdin)
 
 REMUSER = os.getenv("REMUSER","").replace("@NMT.EDU","")
 REMHOST = os.getenv("REMOTE_ADDR","")
 
 
 try:
+	json_args = json.load(sys.stdin)
 	print json.dumps(forge.invoke(command,subcommand,json_args))
 except Exception as e:
 	exc_type, exc_value, exc_traceback = sys.exc_info()
