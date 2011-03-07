@@ -1,3 +1,6 @@
 *.pyc
 forge.db
 build/
+rpm-build/
+dist/
+MANIFEST
