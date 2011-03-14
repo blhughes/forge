@@ -72,10 +72,14 @@ class Commands(object):
 		if '__package__' not in module.__dict__.keys():
 			raise CommandNotFound(command,subcommand)
 		try:
-			(file, pathname, description)=imp.find_module(subcommand,module.__path__)	
-			module=imp.load_module(subcommand,file,pathname,description)
+			(fp, pathname, description)=imp.find_module(subcommand,module.__path__)	
+			module=imp.load_module(subcommand,fp,pathname,description)
  		except ImportError:
 			raise CommandNotFound(command,subcommand)
+		finally:
+			if fp:
+				fp.close()
+
 		if subcommand.capitalize() not in module.__dict__.keys():
 			raise CommandNotFound(command,subcommand)
 		classobj = module.__dict__[subcommand.capitalize()]
