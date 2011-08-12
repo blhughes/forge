@@ -26,7 +26,7 @@ class List(object):
 		for group in groups:
 			overlays= group.overlays
 			for overlay in overlays:
-				results.append({'name':overlay.name,'priority':overlay.priority,'group':self.group,'distro':self.distro})
+				results.append({'name':overlay.name,'priority':overlay.priority,'group':overlay.groups.name,'distro':overlay.groups.distribution})
 
 		results.sort(key=lambda olay: olay['priority'],reverse=True)
 		return results
