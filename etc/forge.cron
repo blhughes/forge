@@ -2,7 +2,7 @@
 ## Forge Cron Jobs
 ##################
 MAILTO=tcc-fedora@nmt.edu
-*/12 * * * * root /usr/bin/rsyncauth
-*/12 * * * * root /usr/bin/remctlauth
-*/4  * * * * root /usr/bin/rsync-conf-gen
+#*/12 * * * * root /usr/bin/rsyncauth
+#*/12 * * * * root /usr/bin/remctlauth
+#*/4  * * * * root /usr/bin/rsync-conf-gen
 
