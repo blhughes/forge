@@ -1,5 +1,6 @@
+%define __python /usr/bin/env python26
 
-%{!?python_sitelib: %define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")}
+%define python_sitelib %(%{__python} -c "from distutils.sysconfig import get_python_lib; print get_python_lib()")
 
 %define is_suse %(test -e /etc/SuSE-release && echo 1 || echo 0)
 
@@ -11,9 +12,10 @@ Release: %(echo `awk '{ print $2 }' %{SOURCE1}`)%{?dist}
 Source0: %{name}-%{version}.tar.gz
 License: GPLv2+
 Group: Applications/System
-Requires: python >= 2.4
+Requires: python26
+BuildRequires: python26
 Requires: pyOpenSSL
-BuildRequires: python-devel
+BuildRequires: python26-devel
 %if %is_suse
 BuildRequires: gettext-devel
 %else
