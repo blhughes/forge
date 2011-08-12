@@ -19,9 +19,14 @@ class List(object):
                 self.session = session
 
 	def call(self):
-		groups = self.session.query(Group).filter(Group.name == self.group)
+		if self.distro:
+			groups = self.session.query(Group).filter(Group.name == self.group).filter(Group.distribution == self.distro)
+		else:
+			groups = self.session.query(Group).filter(Group.name == self.group)
+
 		if not groups:
 			raise LookupError("No Group: %s - %s"%self.group,self.distro)
+
 		results = []
 		for group in groups:
 			overlays= group.overlays
