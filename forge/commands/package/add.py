@@ -14,10 +14,10 @@ class Add(object):
                 self.session = session
 
 	def call(self):
-		group = self.session.query(Group).filter(Group.name == self.group).first()
+		group = self.session.query(Group).filter(Group.name == self.group).filter(Group.distribution == self.distro).one()
 		if not group:
 			raise LookupError("No Group: %s - %s"%self.group,self.distro)
-		package = Package(self.name) 
+		package = Package(self.name)
 		group.packages.append(package)
                 self.session.add(package)
                 self.session.commit()
