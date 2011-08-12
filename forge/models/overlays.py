@@ -6,18 +6,18 @@ metadata = forge.models.metadata
 overlays_table = Table('overlays', metadata,
         Column('id',Integer, primary_key=True),
         Column('name', String),
-        Column('order', Integer),
+        Column('priority', Integer),
 	Column('group',Integer, ForeignKey('groups.id')),
 )
 
 
 class Overlay(object):
-        def __init__(self,name,order):
+        def __init__(self,name,priority):
                 self.name = name
-		self.order = order
+		self.priority = priority
         
         def __repr__(self):
-                return "<Overlay('%s','%d')>" %(self.name,self.order)
+                return "<Overlay('%s','%d')>" %(self.name,self.priority)
 
 
 mapper(Overlay, overlays_table)

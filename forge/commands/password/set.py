@@ -14,7 +14,10 @@ class Set(object):
 		self.session = session
 
 	def call(self):	
-		password = Password(self.account,self.hash)
+		password = self.session.query(Password).filter(Password.account == self.account).first()
+                if not password:
+			password = Password(self.account,self.hash)
+		password.hash = self.hash
 		self.session.add(password)
 		self.session.commit()
 		return {'account':password.account, 'hash':password.hash}
