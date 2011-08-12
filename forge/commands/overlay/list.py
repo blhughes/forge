@@ -6,19 +6,27 @@ class List(object):
 	def __init__(self,json_args,session):
                 if type(json_args) != type({}):
                         raise TypeError("JSON Arg must be dict type")
-                if 'group' and 'distro' not in json_args.keys():
-                        raise forge.ArgumentError()     
+                if 'group' not in json_args:
+                        raise forge.ArgumentError()
+
                 self.group = json_args['group']
-                self.distro = json_args['distro']
+
+		if 'distro' in json_args:
+			self.distro = json_args['distro']
+		else:
+			self.distro = None
+
                 self.session = session
 
 	def call(self):
-		group = self.session.query(Group).filter(Group.name == self.group).first()
-		if not group:
+		groups = self.session.query(Group).filter(Group.name == self.group)
+		if not groups:
 			raise LookupError("No Group: %s - %s"%self.group,self.distro)
 		results = []
-		overlays= group.overlays
-		for overlay in overlays:
-			results.append({'name':overlay.name,'priority':overlay.priority,'group':self.group,'distro':self.distro})
+		for group in groups:
+			overlays= group.overlays
+			for overlay in overlays:
+				results.append({'name':overlay.name,'priority':overlay.priority,'group':self.group,'distro':self.distro})
+
 		results.sort(key=lambda olay: olay['priority'],reverse=True)
 		return results
